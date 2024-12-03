@@ -1,49 +1,33 @@
-# Título do projeto
+# Modelo LSTM para Previsão de Séries Temporais
 
-Com o objetivo de aprimorar o diagnóstico e o acompanhamento de pacientes com insuficiência cardíaca, desenvolvemos um modelo de classificação que combina análise de dados temporais com informações clínicas. Essa abordagem inovadora permite não apenas identificar pacientes em risco, mas também acompanhar a evolução da doença ao longo do tempo, otimizando o tratamento individualizado.
+Este projeto implementa um modelo LSTM (Long Short-Term Memory) para previsão de séries temporais, com uma API REST para servir as previsões.
 
-## 🚀 Começando
+## Estrutura do Projeto
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+modelo_lstm/
+│
+├── modelo_lstm.h5 # Modelo completo salvo
+├── modelo_arquitetura.json # Arquitetura do modelo
+├── modelo.weights.h5 # Pesos do modelo
+├── scaler.pkl # Normalizador dos dados
+├── parametros.json # Parâmetros do modelo
+└── exemplo_uso_api.py # Código exemplo da API
 
-### 📋 Pré-requisitos
-
-De que coisas você precisa para instalar o software e como instalá-lo?
-
-```bash
-git clone https://github.com/lucasabrahao900/TechC_Fase3.git
-```
-
-Ao clonar o repositório, você terá acesso a tudo pertinente ao projeto, inclusive as bibliotecas necessárias através do arquivo requirements.txt. 
-
-### 🔧 Instalação
-
-Agora é necessário setar o ambiente para execução do projeto, recomendamos que utilize um ambiente virtual para o mesmo, logo
+## Requisitos
 
 ```bash
-python -m venv venv
-venv\Scripts\activate  # Windows
-source venv/bin/activate  # Linux/macOS
+pip install tensorflow scikit-learn pandas numpy fastapi uvicorn requests yfinance
 ```
 
-Agora basta instalar as bibliotecas necessárias
+## Notas Importantes
 
-```bash
-pip install -r requirements.txt
-```
+- A sequência de entrada deve ter o mesmo tamanho usado no treino do modelo
+- Os valores devem ser numéricos
+- A ordem temporal dos valores é importante
+- O modelo espera uma sequência de preços/valores normalizados
 
-## 📦 Implantação
+## Limitações e Considerações
 
-Para executar apenas o app para testes, rode o seguinte comando:
-
-```bash
-streamlit run .\app.py
-```
-
-## 🛠️ Construído com
-
-Mencione as ferramentas que você usou para criar seu projeto
-
-* **Python:** Linguagem de programação principal.
-* **Streamlit:** Framework para criação de aplicações web interativas.
-* **Bibliotecas:** Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn.
+- O modelo foi treinado com dados históricos e sua precisão depende da qualidade desses dados
+- As previsões são baseadas em padrões históricos e podem não capturar eventos imprevisíveis
+- Recomenda-se retrainer o modelo periodicamente com dados mais recentes
